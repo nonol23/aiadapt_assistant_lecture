@@ -1,0 +1,1 @@
+# aiadapt_assistant_lecture
