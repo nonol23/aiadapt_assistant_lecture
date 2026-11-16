@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Texte qui défile</title>
+<style>
+:root{--bg:#faf7f2;--fg:#222}
+@media (prefers-color-scheme:dark){:root{--bg:#17171a;--fg:#e6e3dc}}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Georgia,"Times New Roman",serif}
+main{max-width:34em;margin:0 auto;padding:40vh 1.25rem 60vh;font-size:clamp(1.15rem,2.6vw,1.45rem);line-height:1.75}
+h1{font-size:1.9em;line-height:1.2;margin:0 0 1.5em}
+p{margin:0 0 1.3em}
+</style>
+</head>
+<body>
+<main>
+<h1>Début du texte</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus finibus elit vitae eleifend dictum. Cras auctor leo fermentum quam mattis eleifend. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc consectetur faucibus nunc, in sagittis turpis faucibus vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi a nisl mattis, fringilla urna eget, sollicitudin ex. Etiam congue tortor quis ipsum volutpat, at molestie urna eleifend. Ut convallis mattis sapien, et lobortis ante faucibus congue. Fusce tincidunt fringilla odio nec placerat. Pellentesque pharetra mauris quis ex porta malesuada interdum vel urna. Aliquam molestie consequat purus, at tempus lorem porttitor et. Aenean dui nunc, eleifend id ex commodo, fermentum feugiat nisl. Donec maximus quis massa vel cursus. Praesent dapibus eu enim consectetur tristique. Aliquam nec lacus in libero accumsan condimentum ut sed dui. Suspendisse potenti.</p>
+<p>Etiam eget aliquet nunc. Aliquam sed leo lobortis, maximus urna ac, dapibus nulla. Nulla porta consequat elementum. Cras mauris purus, consequat sit amet lobortis ut, blandit eu mi. Morbi aliquet mollis est vel vehicula. Aenean in neque tincidunt, tincidunt tellus blandit, euismod mauris. Nullam venenatis convallis placerat. Ut tincidunt tempor nunc, sed posuere ex consequat in. Vestibulum accumsan aliquam pharetra. Ut eu hendrerit massa, in porta tortor. Aenean tortor ipsum, tempor a nisi quis, malesuada maximus felis. Nulla iaculis nisl ligula, vitae tincidunt diam laoreet ac. Sed ut vestibulum dolor, a congue odio. Integer purus purus, maximus et pretium et, tempor sit amet libero. Suspendisse bibendum sem condimentum, pellentesque ipsum in, cursus libero. Nullam dui risus, vestibulum ornare tincidunt eget, luctus sit amet purus.</p>
+<p>Vestibulum id odio id velit fermentum tincidunt vel ut felis. Curabitur sodales condimentum lectus. Sed quis justo ex. Vivamus hendrerit, turpis sed porta convallis, risus magna interdum erat, ut finibus enim metus ut nulla. Vivamus purus dolor, condimentum ut tortor ac, lobortis fringilla ante. Nunc in nisl arcu. Nulla suscipit, lacus et accumsan ultrices, nisi sem rutrum ipsum, fermentum vestibulum orci ligula eget ipsum. Duis nec nisl tortor.</p>
+<p>Etiam pellentesque fringilla urna, nec consequat odio mattis a. Cras tortor risus, convallis sed porttitor vel, laoreet eget ante. Fusce vel nulla semper felis congue suscipit ac at orci. Aenean in fermentum felis, vitae egestas nisl. Etiam eros orci, auctor non tellus sed, tristique posuere odio. Proin eleifend ante id aliquam luctus. Praesent viverra lorem et massa ornare, non tincidunt quam varius. Vivamus ac finibus dolor, nec tristique ante.</p>
+<p>Fin du texte</p>
+</main>
+<script>
+var speed = 40; // pixels par seconde 
+var pos = 0, last = performance.now();
+
+//ajout de la detection de la souris
+window.addEventListener('mousemove', function(e){
+  speed = e.clientY / window.innerHeight * 150;
+});
+
+function frame(now){
+  var dt = Math.min((now - last) / 1000, 0.1);
+  last = now;
+  var max = document.documentElement.scrollHeight - window.innerHeight;
+  if (pos < max) {
+    pos += speed * dt;
+    window.scrollTo(0, pos);
+    requestAnimationFrame(frame);
+  }
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
