@@ -23,12 +23,16 @@ p{margin:0 0 1.3em}
 <p>Fin du texte</p>
 </main>
 <script>
-var speed = 40; // pixels par seconde 
+
+var maxSpeed = 150;
+var speed = 0; //ne défile pas si la souris ne bouge pas 
 var pos = 0, last = performance.now();
 
 //ajout de la detection de la souris
 window.addEventListener('mousemove', function(e){
-  speed = e.clientY / window.innerHeight * 150;
+  //on prend le milieu de l'écran comme point neutre
+  var ratio = e.clientY / window.innerHeight;   // 0 (haut) → 1 (bas)
+  speed = (ratio - 0.5) * 2 * maxSpeed; //la vitesse varie entre -150 (pour remonter) et +150 (pour descendre)
 });
 
 function frame(now){
